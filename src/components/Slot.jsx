@@ -14,11 +14,11 @@ export default function Slot({ slotTime, isTimeSlot, index }) {
     d.setHours(START_TIME);
     d.setSeconds(0);
     d.setMilliseconds(0);
-    d.setMinutes(Math.trunc(slotTime * (index / 8)));
+    d.setMinutes(45 + Math.trunc(slotTime * (index / 8)));
 
     function getTime(d) {
         const t = d.toLocaleTimeString(undefined, formatting).split(":");
-        if (t.at(0) === "00") t[0] = "12";
+        t[0] = t.at(0).replace("00", "12");
         return t.join(":").toUpperCase();
     }
 
