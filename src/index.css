@@ -22,6 +22,7 @@ html {
 	color-scheme: dark light;
 	font-family: system-ui;
 	color: hsl(var(--color-light));
+	font-size: 11.25px;
 }
 
 body {

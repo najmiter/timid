@@ -6,4 +6,10 @@
     display: grid;
     grid-template-columns: 1fr 3fr;
     backdrop-filter: blur(50px);
+
+    font-size: 1.5rem;
+}
+
+:global(.p2) {
+    padding: 2rem;
 }
