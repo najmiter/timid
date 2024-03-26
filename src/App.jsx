@@ -1,5 +1,9 @@
-function App() {
-    return <h1>Khello</h1>;
-}
+import Homepage from "./components/Homepage";
 
-export default App;
+export default function App() {
+    return (
+        <>
+            <Homepage />
+        </>
+    );
+}

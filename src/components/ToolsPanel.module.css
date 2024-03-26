@@ -1,0 +1,5 @@
+.toolsPanel {
+    background-color: hsl(var(--color-theme-dark), 40%);
+    backdrop-filter: blur(20px);
+
+}

@@ -1,0 +1,4 @@
+.editor {
+    background: radial-gradient(circle at top, hsl(var(--color-fav), 50%), hsl(var(--color-theme-dark), 30%));
+    backdrop-filter: blur(20px);
+}
