@@ -1,0 +1,33 @@
+.table {
+    display: grid;
+    grid-template-columns: repeat(8, 150px);
+    grid-template-rows: repeat(8, 1fr);
+
+    background: hsl(var(--color-theme-dim), 10%);
+
+    width: fit-content;
+    max-height: 70rem;
+    overflow: auto;
+    border-radius: 1rem;
+}
+
+.table::-webkit-scrollbar {
+    display: none;
+}
+
+:global(.table-item) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 2rem;
+    border: 1px solid hsl(var(--color-theme-dim), 10%);
+}
+
+:global(.days-row) {
+    padding: 0;
+    padding: 1rem;
+    background-color: hsl(var(--color-theme-dim), 30%);
+    border: none;
+}
