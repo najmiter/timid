@@ -8,7 +8,7 @@ const slots = Array(8 * 7).fill(0);
 export default function Table({ times }) {
     return (
         <div className={styles.table}>
-            <DaysRow />
+            <DaysRow className={styles.daysRow} />
             {slots.map((_, i) => (
                 <Slot
                     key={i}

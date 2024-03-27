@@ -9,11 +9,12 @@ const formatting = {
 };
 
 export default function Slot({ times, isTimeSlot, index }) {
-    const [inputText, setInputText] = useState(undefined);
+    const [room, setRoom] = useState(undefined);
+    const [subject, setSubject] = useState(undefined);
 
     const { startTime, slotTime } = times;
     const [hour, minutes] = startTime.split(":").map((n) => +n);
-    const classes = `table-item ${styles.slot} ${!isTimeSlot && inputText?.length ? styles.activeSlot : ""}`;
+    const classes = `table-item ${isTimeSlot ? styles.timeSlot : ""} ${!isTimeSlot && room?.length && subject?.length ? styles.activeSlot : ""}`;
 
     const d = new Date();
     d.setHours(hour);
@@ -27,10 +28,17 @@ export default function Slot({ times, isTimeSlot, index }) {
         return t.join(":").toUpperCase();
     }
 
-    function handleSetInputText(e) {
+    function handleSetRoom(e) {
         const value = e.target.value;
         if (value.length < 15) {
-            setInputText(value);
+            setRoom(value);
+        }
+    }
+
+    function handleSetSubject(e) {
+        const value = e.target.value;
+        if (value.length < 20) {
+            setSubject(value);
         }
     }
 
@@ -39,13 +47,22 @@ export default function Slot({ times, isTimeSlot, index }) {
             {isTimeSlot ? (
                 <span className={styles.time}>{getTime(d)}</span>
             ) : (
-                <input
-                    className={styles.room}
-                    type="text"
-                    placeholder="room"
-                    value={inputText}
-                    onChange={handleSetInputText}
-                ></input>
+                <>
+                    <textarea
+                        className={`${styles.input} ${styles.subject}`}
+                        type="text"
+                        placeholder="Subject"
+                        value={subject}
+                        onChange={handleSetSubject}
+                    />
+                    <input
+                        className={styles.input}
+                        type="text"
+                        placeholder="Room"
+                        value={room}
+                        onChange={handleSetRoom}
+                    />
+                </>
             )}
         </div>
     );

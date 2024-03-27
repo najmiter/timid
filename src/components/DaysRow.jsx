@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const days = [
     "Monday",
     "Tuesday",
@@ -8,12 +9,12 @@ const days = [
     "Sunday",
 ];
 
-export default function DaysRow() {
+export default function DaysRow({ className }) {
     return (
         <>
-            <div className="table-item days-row">🕰️</div>
+            <div className={`table-item ${className}`}>🕰️</div>
             {days.map((day) => (
-                <div className="table-item days-row" key={day}>
+                <div className={`table-item ${className}`} key={day}>
                     {day}
                 </div>
             ))}
