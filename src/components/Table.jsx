@@ -3,7 +3,7 @@ import DaysRow from "./DaysRow";
 import Slot from "./Slot";
 
 import styles from "./Table.module.css";
-const slots = Array(7 * 7).fill(0);
+const slots = Array(7 * 6).fill(0);
 
 export default function Table({ times }) {
     return (
@@ -13,7 +13,7 @@ export default function Table({ times }) {
                 <Slot
                     key={i}
                     times={times}
-                    isTimeSlot={i % 7 === 0}
+                    isTimeSlot={i % 6 === 0}
                     index={i}
                 />
             ))}

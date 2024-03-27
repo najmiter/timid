@@ -22,7 +22,7 @@ export default function Slot({ times, isTimeSlot, index }) {
     d.setHours(hour);
     d.setSeconds(0);
     d.setMilliseconds(0);
-    d.setMinutes(minutes + Math.trunc(slotTime * (index / 7)));
+    d.setMinutes(minutes + Math.trunc(slotTime * (index / 6)));
 
     function getTime(d) {
         const t = d.toLocaleTimeString(undefined, formatting).split(":");
@@ -39,7 +39,7 @@ export default function Slot({ times, isTimeSlot, index }) {
 
     function handleSetSubject(e) {
         const value = e.target.value;
-        if (value.length <= 25) {
+        if (value.length <= 35) {
             setSubject(value);
         }
     }

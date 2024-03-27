@@ -30,6 +30,21 @@ body {
 		radial-gradient(circle at left, hsl(var(--color-theme-dark), 10%) 90%, hsl(var(--color-theme-gray), 10%) 10%);
 }
 
+button {
+	border-radius: 100vh;
+	outline: none;
+	border: 1px solid hsl(var(--color-theme-gray), 60%);
+	background-color: hsl(var(--color-theme-gray), 40%);
+	cursor: pointer;
+	padding: 1rem 1.5rem;
+
+	transition: background-color 300ms ease;
+}
+
+button:hover {
+	background-color: hsl(var(--color-theme-gray), 60%);
+}
+
 @media print {
 	input {
 		color: hsl(var(--color-light));

@@ -48,6 +48,7 @@ export default function App() {
                         type={"number"}
                         onChange={handleSetSlotTime}
                     />
+                    <button onClick={() => print(document)}>Print</button>
                 </ToolsPanel>
                 <Editor>
                     <Table times={times}></Table>

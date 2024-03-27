@@ -1,6 +1,6 @@
 .table {
     display: grid;
-    grid-template-columns: repeat(7, 180px);
+    grid-template-columns: repeat(6, 200px);
     grid-template-rows: 70px, repeat(7, 1fr);
 
     background: hsl(var(--color-theme-dim), 10%);
@@ -27,7 +27,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 2rem;
+    padding: 1rem;
     cursor: default;
     border: 1px solid hsl(var(--color-theme-dim), 30%);
     background-color: rgb(42, 42, 42);
