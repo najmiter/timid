@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import styles from "./Slot.module.css";
 
 const formatting = {
@@ -8,15 +9,17 @@ const formatting = {
 };
 
 export default function Slot({ times, isTimeSlot, index }) {
+    const [inputText, setInputText] = useState(undefined);
+
     const { startTime, slotTime } = times;
+    const [hour, minutes] = startTime.split(":").map((n) => +n);
+    const classes = `table-item ${styles.slot} ${!isTimeSlot && inputText?.length ? styles.activeSlot : ""}`;
 
     const d = new Date();
-    d.setHours(startTime.split(":").at(0));
+    d.setHours(hour);
     d.setSeconds(0);
     d.setMilliseconds(0);
-    d.setMinutes(
-        +startTime.split(":").at(1) + Math.trunc(slotTime * (index / 8))
-    );
+    d.setMinutes(minutes + Math.trunc(slotTime * (index / 8)));
 
     function getTime(d) {
         const t = d.toLocaleTimeString(undefined, formatting).split(":");
@@ -24,12 +27,25 @@ export default function Slot({ times, isTimeSlot, index }) {
         return t.join(":").toUpperCase();
     }
 
+    function handleSetInputText(e) {
+        const value = e.target.value;
+        if (value.length < 15) {
+            setInputText(value);
+        }
+    }
+
     return (
-        <div className={`table-item ${styles.slot}`}>
+        <div className={classes}>
             {isTimeSlot ? (
                 <span className={styles.time}>{getTime(d)}</span>
             ) : (
-                <span>Room</span>
+                <input
+                    className={styles.room}
+                    type="text"
+                    placeholder="room"
+                    value={inputText}
+                    onChange={handleSetInputText}
+                ></input>
             )}
         </div>
     );

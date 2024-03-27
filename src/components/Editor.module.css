@@ -5,3 +5,9 @@
     display: flex;
     justify-content: center;
 }
+
+@media print {
+    .editor {
+        align-items: center;
+    }
+}

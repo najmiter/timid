@@ -29,3 +29,9 @@ body {
 	background: radial-gradient(circle at top, hsl(var(--color-theme), 50%) 5%, hsl(var(--color-fav)) 80%),
 		radial-gradient(circle at left, hsl(var(--color-theme-dark), 10%) 90%, hsl(var(--color-theme-gray), 10%) 10%);
 }
+
+@media print {
+	input {
+		color: hsl(var(--color-light));
+	}
+}

@@ -1,31 +1,14 @@
 .toolsPanel {
     background-color: hsl(var(--color-theme-dark), 40%);
     backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
 }
 
-.startTime {
-    padding: 1rem;
-    border-radius: 100vh;
-    outline: none;
-    border: 2px solid hsl(var(--color-theme-dark), 80%);
-    background-color: hsl(var(--color-theme-dark), 40%);
-    cursor: pointer;
-    margin-inline: 1rem;
-    padding: 1rem 1.5rem;
-    position: relative;
-
-    transition: background-color 300ms ease;
-}
-
-.startTime::-webkit-calendar-picker-indicator {
-    -webkit-appearance: none;
-    cursor: pointer;
-    display: block;
-    position: absolute;
-    overflow: hidden;
-    padding: 100%;
-}
-
-.startTime:hover {
-    background-color: hsl(var(--color-theme-dark), 80%);
+@media print {
+    .toolsPanel {
+        display: none;
+    }
 }

@@ -1,0 +1,27 @@
+.inputItem {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.input {
+    text-align: center;
+    border-radius: 100vh;
+    outline: none;
+    border: 1px solid hsl(var(--color-theme-gray), 60%);
+    background-color: hsl(var(--color-theme-gray), 40%);
+    cursor: pointer;
+    padding: 1rem 1.5rem;
+
+    transition: background-color 300ms ease;
+}
+
+.input::-webkit-calendar-picker-indicator {
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.input:hover {
+    background-color: hsl(var(--color-theme-gray), 60%);
+}

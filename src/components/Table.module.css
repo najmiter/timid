@@ -1,7 +1,7 @@
 .table {
     display: grid;
     grid-template-columns: repeat(8, 150px);
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: 70px, repeat(7, 1fr);
 
     background: hsl(var(--color-theme-dim), 10%);
 
@@ -9,6 +9,12 @@
     max-height: 70rem;
     overflow: auto;
     border-radius: 1rem;
+}
+
+@media print {
+    .table {
+        min-height: 70rem;
+    }
 }
 
 .table::-webkit-scrollbar {
@@ -22,12 +28,13 @@
     align-items: center;
     width: 100%;
     padding: 2rem;
-    border: 1px solid hsl(var(--color-theme-dim), 10%);
+    cursor: default;
+    border: 1px solid hsl(var(--color-theme-dim), 30%);
+    background-color: rgb(42, 42, 42);
 }
 
 :global(.days-row) {
     padding: 0;
-    padding: 1rem;
     background-color: hsl(var(--color-theme-dim), 30%);
     border: none;
 }
