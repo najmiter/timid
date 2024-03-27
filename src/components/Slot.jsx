@@ -14,13 +14,15 @@ export default function Slot({ times, isTimeSlot, index }) {
 
     const { startTime, slotTime } = times;
     const [hour, minutes] = startTime.split(":").map((n) => +n);
-    const classes = `table-item ${isTimeSlot ? styles.timeSlot : ""} ${!isTimeSlot && room?.length && subject?.length ? styles.activeSlot : ""}`;
+    const classes = `table-item 
+                ${isTimeSlot ? styles.timeSlot : ""} 
+                ${!isTimeSlot && room?.length && subject?.trim().length ? styles.activeSlot : ""}`;
 
     const d = new Date();
     d.setHours(hour);
     d.setSeconds(0);
     d.setMilliseconds(0);
-    d.setMinutes(minutes + Math.trunc(slotTime * (index / 8)));
+    d.setMinutes(minutes + Math.trunc(slotTime * (index / 7)));
 
     function getTime(d) {
         const t = d.toLocaleTimeString(undefined, formatting).split(":");
@@ -37,7 +39,7 @@ export default function Slot({ times, isTimeSlot, index }) {
 
     function handleSetSubject(e) {
         const value = e.target.value;
-        if (value.length < 20) {
+        if (value.length <= 20) {
             setSubject(value);
         }
     }
