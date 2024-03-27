@@ -1,5 +1,6 @@
 .timeSlot {
     justify-content: center !important;
+    background-color: hsl(var(--color-theme-dark), 30%) !important;
 }
 
 .time {

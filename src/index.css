@@ -21,13 +21,15 @@
 html {
 	color-scheme: dark light;
 	font-family: system-ui;
-	color: hsl(var(--color-light));
+	color: hsl(var(--color-light), 80%);
 	font-size: 11.25px;
 }
 
 body {
 	background: radial-gradient(circle at top, hsl(var(--color-theme), 50%) 5%, hsl(var(--color-fav)) 80%),
 		radial-gradient(circle at left, hsl(var(--color-theme-dark), 10%) 90%, hsl(var(--color-theme-gray), 10%) 10%);
+
+	background-repeat: no-repeat;
 }
 
 button {
@@ -47,6 +49,26 @@ button:hover {
 
 @media print {
 	input {
-		color: hsl(var(--color-light));
+		color: hsl(var(--color-light), 80%);
 	}
+}
+
+@media screen and (max-width: 870px) {
+	body {
+		display: none;
+		position: relative;
+	}
+
+	html::after {
+		content: "Please use a bigger screen. We don't support smaller screens :)";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		translate: -50% -50%;
+		color: hsl(var(--color-light), 80%);
+		text-align: center;
+		font-size: 2em;
+
+	}
+
 }

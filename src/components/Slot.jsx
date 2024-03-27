@@ -16,7 +16,7 @@ export default function Slot({ times, isTimeSlot, index }) {
     const [hour, minutes] = startTime.split(":").map((n) => +n);
     const classes = `table-item 
                 ${isTimeSlot ? styles.timeSlot : ""} 
-                ${!isTimeSlot && room?.length && subject?.trim().length ? styles.activeSlot : ""}`;
+                ${!isTimeSlot && room?.trim().length && subject?.trim().length ? styles.activeSlot : ""}`;
 
     const d = new Date();
     d.setHours(hour);

@@ -11,6 +11,7 @@
     outline: none;
     border: 1px solid hsl(var(--color-theme-gray), 60%);
     background-color: hsl(var(--color-theme-gray), 40%);
+    color: hsl(var(--color-light));
     cursor: pointer;
     padding: 1rem 1.5rem;
 
