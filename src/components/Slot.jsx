@@ -39,7 +39,7 @@ export default function Slot({ times, isTimeSlot, index }) {
 
     function handleSetSubject(e) {
         const value = e.target.value;
-        if (value.length <= 20) {
+        if (value.length <= 25) {
             setSubject(value);
         }
     }
