@@ -1,20 +1,22 @@
 /* eslint-disable react/prop-types */
 import styles from "./Slot.module.css";
 
-const START_TIME = 8; // AM
-
 const formatting = {
     hour12: true,
     hour: "2-digit",
     minute: "2-digit",
 };
 
-export default function Slot({ slotTime, isTimeSlot, index }) {
+export default function Slot({ times, isTimeSlot, index }) {
+    const { startTime, slotTime } = times;
+
     const d = new Date();
-    d.setHours(START_TIME);
+    d.setHours(startTime.split(":").at(0));
     d.setSeconds(0);
     d.setMilliseconds(0);
-    d.setMinutes(45 + Math.trunc(slotTime * (index / 8)));
+    d.setMinutes(
+        +startTime.split(":").at(1) + Math.trunc(slotTime * (index / 8))
+    );
 
     function getTime(d) {
         const t = d.toLocaleTimeString(undefined, formatting).split(":");
