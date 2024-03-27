@@ -14,6 +14,7 @@ export default function Input({
             <label htmlFor={id}>{labelText}</label>
             <input
                 value={value}
+                min={0}
                 type={type}
                 id={id}
                 className={`${styles.input} ${className}`}

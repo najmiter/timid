@@ -51,6 +51,10 @@ button:hover {
 	input {
 		color: hsl(var(--color-light), 80%);
 	}
+
+	@page {
+		size: A4 landscape;
+	}
 }
 
 @media screen and (max-width: 870px) {

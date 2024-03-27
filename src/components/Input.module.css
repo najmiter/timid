@@ -1,8 +1,17 @@
 .inputItem {
     display: flex;
-    gap: 1rem;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+}
+
+input[type=number] {
+    max-width: 6rem;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 
 .input {
