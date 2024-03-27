@@ -1,15 +1,34 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import DaysRow from "./DaysRow";
 import Slot from "./Slot";
 
 import styles from "./Table.module.css";
-const slots = Array(7 * 6).fill(0);
 
 export default function Table({ times }) {
+    const [slots, setSlots] = useState({});
+    const slotsKeys = Object.keys(slots);
+
+    useEffect(function () {
+        const timid = JSON.parse(localStorage.getItem("timid"));
+
+        async function readJSON() {
+            const jwb = await fetch("/slots.json");
+            const timid = await jwb.json();
+            setSlots(timid);
+        }
+
+        if (timid) {
+            setSlots(timid);
+        } else {
+            readJSON();
+        }
+    }, []);
+
     return (
         <div className={styles.table}>
             <DaysRow className={styles.daysRow} />
-            {slots.map((_, i) => (
+            {slotsKeys.map((_, i) => (
                 <Slot
                     key={i}
                     times={times}
