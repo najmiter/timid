@@ -12,6 +12,7 @@
 
 @media print {
     .table {
+        grid-template-columns: repeat(6, 200px);
         min-height: 70rem;
     }
 }
