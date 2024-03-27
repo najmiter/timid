@@ -15,11 +15,11 @@ export default function Table({ times }) {
         async function readJSON() {
             const jwb = await fetch("/slots.json");
             const timid = await jwb.json();
-            setSlots(timid);
+            setSlots(() => timid);
         }
 
         if (timid) {
-            setSlots(timid);
+            setSlots(() => timid);
         } else {
             readJSON();
         }
@@ -30,6 +30,7 @@ export default function Table({ times }) {
             <DaysRow className={styles.daysRow} />
             {slotsKeys.map((_, i) => (
                 <Slot
+                    slots={slots}
                     key={i}
                     times={times}
                     isTimeSlot={i % 6 === 0}
