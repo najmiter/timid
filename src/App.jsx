@@ -26,8 +26,8 @@ function getInitialSlots() {
 export default function App() {
     const [slots, setSlots] = useState(getInitialSlots());
     const [times, setTimes] = useState({
-        slotTime: 90,
-        startTime: "08:45",
+        slotTime: 200,
+        startTime: "16:00",
         break: true,
     });
 

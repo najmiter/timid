@@ -54,14 +54,14 @@ export default function Current({ TABLE_SIZE, times }) {
                     <h1>
                         Currently
                         <span className={styles.currentLecture}>
-                            &lsquo;{slots[3]?.subject}&rsquo;
+                            &lsquo;{slots[currentLectureNumber]?.subject}&rsquo;
                         </span>
                     </h1>
 
                     <h2>
                         In room
                         <span className={styles.currentLecture}>
-                            &lsquo;{slots[3]?.room}&rsquo;
+                            &lsquo;{slots[currentLectureNumber]?.room}&rsquo;
                         </span>
                     </h2>
                 </>
