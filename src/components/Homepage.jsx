@@ -8,7 +8,7 @@ import DaysRow from "./DaysRow";
 import Slot from "./Slot";
 
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams, useParams } from "react-router-dom";
 
 export default function Homepage({
     slots,
@@ -18,19 +18,28 @@ export default function Homepage({
     setTimes,
 }) {
     const [title, setTitle] = useState("");
+    const [searchParams, setSearchParams] = useSearchParams();
+    const time = useParams();
 
     const { slotTime, startTime } = times;
     const slotsKeys = Object.keys(slots);
 
     useEffect(
         function () {
-            const timid = JSON.parse(localStorage.getItem("timid"));
+            const timeParam = searchParams.get("time");
+            setSearchParams({});
+            if (timeParam) {
+                localStorage.setItem("timid", timeParam);
+                window.location.href = "/current";
+            }
+
+            const timid = JSON.parse(localStorage.getItem("timid") ?? "{}");
 
             setSlots(() =>
                 Object.keys(timid).length ? timid : getInitialSlots()
             );
         },
-        [setSlots, getInitialSlots]
+        [setSlots, getInitialSlots, searchParams, setSearchParams]
     );
 
     function handleSetTimes(e) {
@@ -53,6 +62,14 @@ export default function Homepage({
         if (title.length < 50) {
             setTitle(title);
         }
+    }
+
+    function handleShare(e) {
+        e.preventDefault();
+        const url = new URLSearchParams(window.location.search);
+        url.set("time", JSON.stringify(slots));
+
+        navigator.clipboard.writeText(`${window.location.href}?${url}`);
     }
 
     function clearSlots() {
@@ -94,6 +111,9 @@ export default function Homepage({
                     </button>
                     <Link className="primaryBtn" to="/current">
                         Current
+                    </Link>
+                    <Link onClick={handleShare} className="primaryBtn" to="/">
+                        Share
                     </Link>
                 </div>
             </ToolsPanel>

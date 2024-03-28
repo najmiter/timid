@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
 import styles from "./Current.module.css";
+import { useParams } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 export default function Current({ TABLE_SIZE, times }) {
     const [slots, setSlots] = useState({});
+    const { time } = useParams();
+
     const { slotTime, startTime } = times;
     const currentLectureNumber = getCurrentLecture();
 
     useEffect(
         function () {
             const timid = JSON.parse(localStorage.getItem("timid"));
+            // console.log(time);
 
             const today = new Date().getDay();
             const todaysSlots = {};
