@@ -8,7 +8,6 @@ const formatting = {
 };
 
 export default function Slot({ times, isTimeSlot, index, slots, setSlots }) {
-    // console.log(slots[index]?.room);
     const room = slots[index]?.room ?? "";
     const subject = slots[index]?.subject ?? "";
     const isValidInput = room?.trim().length && subject?.trim().length;
