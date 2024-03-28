@@ -1,0 +1,32 @@
+.actionButtons {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 1rem;
+}
+
+.secondarBtn {
+    border-radius: 100vh;
+    outline: none;
+    border: 1px solid hsl(var(--color-theme), 60%);
+    background-color: hsl(var(--color-theme), 40%);
+    cursor: pointer;
+    padding: 1rem 1.5rem;
+
+    transition: background-color 300ms ease;
+}
+
+.secondarBtn:hover {
+    background-color: hsl(var(--color-theme), 60%);
+}
+
+.tableTitle {
+    font-size: 2.3rem;
+    display: none;
+}
+
+@media print {
+    .tableTitle {
+        display: block;
+    }
+}

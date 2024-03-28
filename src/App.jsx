@@ -7,6 +7,7 @@ import DaysRow from "./components/DaysRow";
 import Slot from "./components/Slot";
 
 import styles from "./components/Table.module.css";
+import "./App.css";
 
 import { useState, useEffect } from "react";
 
@@ -21,6 +22,7 @@ function getInitialSlots() {
 }
 
 export default function App() {
+    const [title, setTitle] = useState("");
     const [slots, setSlots] = useState(getInitialSlots());
     const [times, setTimes] = useState({
         slotTime: 90,
@@ -52,6 +54,13 @@ export default function App() {
         });
     }
 
+    function handleSetTitle(e) {
+        const title = e.target.value;
+        if (title.length < 25) {
+            setTitle(title);
+        }
+    }
+
     function clearSlots() {
         localStorage.setItem("timid", JSON.stringify(getInitialSlots()));
 
@@ -76,10 +85,22 @@ export default function App() {
                         type={"number"}
                         onChange={handleSetSlotTime}
                     />
-                    <button onClick={() => print(document)}>Print</button>
-                    <button onClick={clearSlots}>Clear</button>
+                    <Input
+                        id={"tableTitle"}
+                        labelText={"Title"}
+                        value={title}
+                        type={"text"}
+                        onChange={handleSetTitle}
+                    />
+                    <div className="actionButtons">
+                        <button onClick={() => print(document)}>Print</button>
+                        <button className="secondarBtn" onClick={clearSlots}>
+                            Clear
+                        </button>
+                    </div>
                 </ToolsPanel>
                 <Editor>
+                    <h1 className="tableTitle">{title}</h1>
                     <Table>
                         <DaysRow className={styles.daysRow} />
                         {slotsKeys.map((_, i) => (

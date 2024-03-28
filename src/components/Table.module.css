@@ -5,7 +5,7 @@
 
     background: hsl(var(--color-theme-dim), 10%);
 
-    max-height: 70rem;
+    min-height: 70rem;
     overflow: auto;
     border-radius: 1rem;
 }
