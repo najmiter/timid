@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
 import styles from "./Slot.module.css";
 
 const formatting = {
@@ -8,21 +7,11 @@ const formatting = {
     minute: "2-digit",
 };
 
-export default function Slot({ times, isTimeSlot, index, slots }) {
-    const [room, setRoom] = useState(slots[index]?.room ?? "");
-    const [subject, setSubject] = useState(slots[index]?.subject ?? "");
+export default function Slot({ times, isTimeSlot, index, slots, setSlots }) {
+    // console.log(slots[index]?.room);
+    const room = slots[index]?.room ?? "";
+    const subject = slots[index]?.subject ?? "";
     const isValidInput = room?.trim().length && subject?.trim().length;
-
-    useEffect(
-        function () {
-            const newSlots = structuredClone(slots);
-            newSlots[index] = { room, subject };
-            if (isValidInput) {
-                localStorage.setItem("timid", JSON.stringify(newSlots));
-            }
-        },
-        [slots, index, room, subject, isValidInput]
-    );
 
     const { startTime, slotTime } = times;
     const [hour, minutes] = startTime.split(":").map((n) => +n);
@@ -45,14 +34,24 @@ export default function Slot({ times, isTimeSlot, index, slots }) {
     function handleSetRoom(e) {
         const value = e.target.value;
         if (value.length < 15) {
-            setRoom(value);
+            const newSlots = { ...slots };
+            newSlots[index] = { ...newSlots[index], room: value };
+
+            setSlots(newSlots);
+
+            localStorage.setItem("timid", JSON.stringify(newSlots));
         }
     }
 
     function handleSetSubject(e) {
         const value = e.target.value;
         if (value.length <= 35) {
-            setSubject(value);
+            const newSlots = { ...slots };
+            newSlots[index] = { ...newSlots[index], subject: value };
+
+            setSlots(newSlots);
+
+            localStorage.setItem("timid", JSON.stringify(newSlots));
         }
     }
 
