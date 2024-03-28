@@ -35,3 +35,7 @@ input[type=number]::-webkit-inner-spin-button {
 .input:hover {
     background-color: hsl(var(--color-theme-gray), 60%);
 }
+
+.input::placeholder {
+    color: hsl(var(--color-light), 70%);
+}

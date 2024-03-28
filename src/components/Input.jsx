@@ -8,11 +8,13 @@ export default function Input({
     type,
     className,
     onChange,
+    placeholder = "",
 }) {
     return (
         <div className={styles.inputItem}>
-            <label htmlFor={id}>{labelText}</label>
+            {labelText && <label htmlFor={id}>{labelText}</label>}
             <input
+                placeholder={placeholder}
                 value={value}
                 min={0}
                 type={type}

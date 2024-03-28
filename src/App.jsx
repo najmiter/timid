@@ -56,7 +56,7 @@ export default function App() {
 
     function handleSetTitle(e) {
         const title = e.target.value;
-        if (title.length < 25) {
+        if (title.length < 50) {
             setTitle(title);
         }
     }
@@ -72,6 +72,14 @@ export default function App() {
             <Homepage>
                 <ToolsPanel>
                     <Input
+                        id={"tableTitle"}
+                        labelText=""
+                        value={title}
+                        type={"text"}
+                        placeholder="Title of the table..."
+                        onChange={handleSetTitle}
+                    />
+                    <Input
                         id={"startTime"}
                         labelText={"Start of lectures:"}
                         value={startTime}
@@ -85,13 +93,7 @@ export default function App() {
                         type={"number"}
                         onChange={handleSetSlotTime}
                     />
-                    <Input
-                        id={"tableTitle"}
-                        labelText={"Title"}
-                        value={title}
-                        type={"text"}
-                        onChange={handleSetTitle}
-                    />
+
                     <div className="actionButtons">
                         <button onClick={() => print(document)}>Print</button>
                         <button className="secondarBtn" onClick={clearSlots}>
