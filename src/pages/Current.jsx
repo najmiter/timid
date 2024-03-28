@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 export default function Current({ TABLE_SIZE, times }) {
     const [slots, setSlots] = useState({});
     const { time } = useParams();
+    console.log(time);
 
     const { slotTime, startTime } = times;
     const currentLectureNumber = getCurrentLecture();

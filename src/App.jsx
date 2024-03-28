@@ -35,7 +35,6 @@ export default function App() {
         <BrowserRouter>
             <Routes>
                 <Route
-                    index
                     path="/"
                     element={
                         <Homepage
@@ -48,11 +47,11 @@ export default function App() {
                     }
                 ></Route>
                 <Route
-                    path="/current"
+                    path="current"
                     element={<Current TABLE_SIZE={TABLE_SIZE} times={times} />}
                 ></Route>
                 <Route
-                    path="/:time"
+                    path=":time"
                     element={<Current TABLE_SIZE={TABLE_SIZE} times={times} />}
                 ></Route>
             </Routes>

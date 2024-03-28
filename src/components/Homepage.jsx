@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import styles from "./Homepage.module.css";
 import ToolsPanel from "./ToolsPanel";
@@ -6,6 +7,7 @@ import Table from "./Table";
 import Input from "./Input";
 import DaysRow from "./DaysRow";
 import Slot from "./Slot";
+import Current from "../pages/Current";
 
 import { useState, useEffect } from "react";
 import { Link, useSearchParams, useParams } from "react-router-dom";
@@ -17,8 +19,9 @@ export default function Homepage({
     times,
     setTimes,
 }) {
-    const [title, setTitle] = useState("");
     const [searchParams, setSearchParams] = useSearchParams();
+
+    const [title, setTitle] = useState("");
     const time = useParams();
 
     const { slotTime, startTime } = times;
@@ -26,20 +29,13 @@ export default function Homepage({
 
     useEffect(
         function () {
-            const timeParam = searchParams.get("time");
-            setSearchParams({});
-            if (timeParam) {
-                localStorage.setItem("timid", timeParam);
-                window.location.href = "/current";
-            }
-
             const timid = JSON.parse(localStorage.getItem("timid") ?? "{}");
 
             setSlots(() =>
                 Object.keys(timid).length ? timid : getInitialSlots()
             );
         },
-        [setSlots, getInitialSlots, searchParams, setSearchParams]
+        [setSlots, getInitialSlots]
     );
 
     function handleSetTimes(e) {
@@ -76,6 +72,12 @@ export default function Homepage({
         localStorage.setItem("timid", JSON.stringify(getInitialSlots()));
 
         setSlots(getInitialSlots());
+    }
+
+    const timeParam = searchParams.get("time");
+    if (timeParam) {
+        localStorage.setItem("timid", timeParam);
+        return <Current TABLE_SIZE={7 * 6} times={times} />;
     }
 
     return (
