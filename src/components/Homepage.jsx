@@ -98,7 +98,7 @@ export default function Homepage({
                 </div>
             </ToolsPanel>
             <Editor>
-                <h1 className="tableTitle">{title}</h1>
+                {title && <h1 className="tableTitle">{title}</h1>}
                 <Table>
                     <DaysRow className="daysRow" />
                     {slotsKeys.map((_, i) => (
