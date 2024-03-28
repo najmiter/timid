@@ -33,7 +33,7 @@
     background-color: rgb(42, 42, 42);
 }
 
-.daysRow {
+:global(.daysRow) {
     justify-content: center;
     padding: 1rem 0;
     background-color: hsl(var(--color-theme-dark), 30%);

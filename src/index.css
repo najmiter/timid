@@ -32,9 +32,13 @@ body {
 	background-repeat: no-repeat;
 }
 
-button {
+button,
+a {
 	border-radius: 100vh;
 	outline: none;
+	text-decoration: none;
+	color: inherit;
+	font-size: 1.3rem;
 	border: 1px solid hsl(var(--color-theme-gray), 60%);
 	background-color: hsl(var(--color-theme-gray), 40%);
 	cursor: pointer;
@@ -43,7 +47,8 @@ button {
 	transition: background-color 300ms ease;
 }
 
-button:hover {
+button:hover,
+a:hover {
 	background-color: hsl(var(--color-theme-gray), 60%);
 }
 

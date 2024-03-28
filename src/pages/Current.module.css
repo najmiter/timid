@@ -1,0 +1,13 @@
+.currentMain {
+    height: 100vh;
+    height: 100svh;
+    width: 100vw;
+    width: 100svw;
+    font-size: 4rem;
+    text-align: center;
+}
+
+.currentLecture {
+    color: hsl(var(--color-theme));
+
+}

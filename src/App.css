@@ -5,18 +5,22 @@
     gap: 1rem;
 }
 
-.secondarBtn {
-    border-radius: 100vh;
-    outline: none;
+.secondaryBtn {
     border: 1px solid hsl(var(--color-theme), 60%);
     background-color: hsl(var(--color-theme), 40%);
-    cursor: pointer;
-    padding: 1rem 1.5rem;
 
-    transition: background-color 300ms ease;
 }
 
-.secondarBtn:hover {
+.primaryBtn {
+    border: 1px solid hsl(var(--color-fav), 60%);
+    background-color: hsl(var(--color-fav), 40%);
+}
+
+.primaryBtn:hover {
+    background-color: hsl(var(--color-fav), 60%);
+}
+
+.secondaryBtn:hover {
     background-color: hsl(var(--color-theme), 60%);
 }
 
