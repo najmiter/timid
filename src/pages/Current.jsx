@@ -51,6 +51,7 @@ export default function Current({ TABLE_SIZE, times }) {
         return slotNumber ? slotNumber - 1 : slotNumber;
     }
 
+    console.log(slots);
     return (
         <main className={styles.currentMain}>
             <div className={styles.dataWrapper}>
@@ -58,13 +59,14 @@ export default function Current({ TABLE_SIZE, times }) {
                 <>
                     <header className={styles.kheader}>
                         <h1 className={styles.currentHeadingSubject}>
-                            {/* Data Structures & Algorithms */}
-                            {slots[currentLectureNumber]?.subject ?? "FREE!"}
+                            {slots[currentLectureNumber]?.subject.length
+                                ? slots[currentLectureNumber]?.subject
+                                : "FREE!"}
                         </h1>
                         <h2 className={styles.currentHeadingRoom}>
-                            {/* B-101 */}
-                            {slots[currentLectureNumber]?.room ??
-                                "GO HOME OR SOME SHIT"}
+                            {slots[currentLectureNumber]?.room.length
+                                ? slots[currentLectureNumber]?.room
+                                : "GO HOME OR SOME SHIT"}
                         </h2>
                     </header>
                     <hr />
@@ -76,64 +78,38 @@ export default function Current({ TABLE_SIZE, times }) {
                         <ul>
                             {futureLectures.map((_, i) => (
                                 <li key={i}>
-                                    {slots[i] ? (
-                                        <div
-                                            className={`${styles.futureLectureItem} ${
-                                                currentLectureNumber === i
-                                                    ? styles.currentSlot
-                                                    : i < currentLectureNumber
-                                                      ? styles.doneLecture
-                                                      : ""
-                                            }`}
-                                        >
-                                            <h3
-                                                className={
-                                                    styles.futureLectureSubject
-                                                }
-                                            >
-                                                {slots[i]?.subject ?? "FREE"}
-                                            </h3>
-                                            <h4
-                                                className={
-                                                    styles.futureLectureRoom
-                                                }
-                                            >
-                                                {slots[i]?.room ?? "FREE"}
-                                            </h4>
-                                        </div>
-                                    ) : (
-                                        <div
-                                            className={`${styles.futureLectureItem} ${styles.freeLecture} ${
-                                                currentLectureNumber === i
-                                                    ? styles.currentSlot
-                                                    : ""
-                                            }`}
-                                        >
-                                            FREE
-                                        </div>
-                                    )}
+                                    <div
+                                        className={`${styles.futureLectureItem} ${
+                                            currentLectureNumber === i
+                                                ? styles.currentSlot
+                                                : i < currentLectureNumber
+                                                  ? styles.doneLecture
+                                                  : ""
+                                        } ${slots[i]?.subject && slots[i]?.room ? "" : styles.freeLecture}`}
+                                    >
+                                        {slots[i]?.subject && slots[i]?.room ? (
+                                            <>
+                                                <h3
+                                                    className={
+                                                        styles.futureLectureSubject
+                                                    }
+                                                >
+                                                    {slots[i]?.subject}
+                                                </h3>
+                                                <h4
+                                                    className={
+                                                        styles.futureLectureRoom
+                                                    }
+                                                >
+                                                    {slots[i]?.room}
+                                                </h4>
+                                            </>
+                                        ) : (
+                                            "FREE"
+                                        )}
+                                    </div>
                                 </li>
                             ))}
-                            {/* <li>
-                                <div className={styles.futureLectureItem}>
-                                    <h3 className={styles.futureLectureSubject}>
-                                        Object Oriented Language
-                                    </h3>
-                                    <h4 className={styles.futureLectureRoom}>
-                                        NB-201
-                                    </h4>
-                                </div>
-                            </li>
-                            <li>
-                                <div className={styles.futureLectureItem}>
-                                    <h3 className={styles.futureLectureSubject}>
-                                        Digital Logic & Design
-                                    </h3>
-                                    <h4 className={styles.futureLectureRoom}>
-                                        B-207 LAB
-                                    </h4>
-                                </div>
-                            </li> */}
                         </ul>
                     </div>
                 </>
