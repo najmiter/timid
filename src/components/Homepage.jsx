@@ -10,7 +10,7 @@ import Slot from "./Slot";
 import Current from "../pages/Current";
 
 import { useState, useEffect } from "react";
-import { Link, useSearchParams, useParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 export default function Homepage({
     slots,
@@ -22,7 +22,6 @@ export default function Homepage({
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [title, setTitle] = useState("");
-    const time = useParams();
 
     const { slotTime, startTime } = times;
     const slotsKeys = Object.keys(slots);

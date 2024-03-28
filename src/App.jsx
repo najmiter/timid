@@ -1,12 +1,3 @@
-// import ToolsPanel from "./components/ToolsPanel";
-// import Editor from "./components/Editor";
-// import Table from "./components/Table";
-// import Homepage from "./components/Homepage";
-// import Input from "./components/Input";
-// import DaysRow from "./components/DaysRow";
-// import Slot from "./components/Slot";
-
-// import styles from "./components/Table.module.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
@@ -26,8 +17,8 @@ function getInitialSlots() {
 export default function App() {
     const [slots, setSlots] = useState(getInitialSlots());
     const [times, setTimes] = useState({
-        slotTime: 90,
-        startTime: "08:45",
+        slotTime: 40,
+        startTime: "00:00",
         break: true,
     });
 

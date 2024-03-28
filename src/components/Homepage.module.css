@@ -16,16 +16,18 @@
 
 @media screen and (max-width: 870px) {
     .main {
-        display: none;
         position: relative;
     }
 
     .main::after {
         content: "Please use a bigger screen. We don't support smaller screens :)";
         position: absolute;
-        top: 50%;
-        left: 50%;
-        translate: -50% -50%;
+        z-index: 99;
+        min-width: 100vw;
+        min-height: 100vh;
+        padding-block: 50%;
+        padding-inline: 2rem;
+        background-color: black;
         color: hsl(var(--color-light), 80%);
         text-align: center;
         font-size: 2em;

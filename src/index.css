@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 :root {
 	--color-light: 230, 19%, 94%;
 	--color-gray: 233, 9%, 63%;
@@ -20,7 +22,7 @@
 
 html {
 	color-scheme: dark light;
-	font-family: system-ui;
+	font-family: "Inter", sans-serif;
 	color: hsl(var(--color-light), 80%);
 	font-size: 11.25px;
 }
@@ -50,6 +52,14 @@ a {
 button:hover,
 a:hover {
 	background-color: hsl(var(--color-theme-gray), 60%);
+}
+
+li {
+	list-style: none;
+}
+
+hr {
+	border: 0.5px solid hsl(var(--color-gray), 20%);
 }
 
 @media print {

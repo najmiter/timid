@@ -7,21 +7,24 @@ export default function Current({ TABLE_SIZE, times }) {
 
     const { slotTime, startTime } = times;
     const currentLectureNumber = getCurrentLecture();
+    const futureLectures = Array(Object.keys(slots).length).fill(0);
 
     useEffect(
         function () {
             const timid = JSON.parse(localStorage.getItem("timid"));
 
             const today = new Date().getDay();
-            const todaysSlots = {};
-            const cols = 6;
+            if (today !== 6 && today !== 0) {
+                const todaysSlots = {};
+                const cols = 6;
 
-            for (let i = 0; i < cols; i += 1) {
-                const todayAddress = i * cols + today;
-                todaysSlots[i] = timid[todayAddress];
+                for (let i = 0; i < cols; i += 1) {
+                    const todayAddress = i * cols + today;
+                    todaysSlots[i] = timid[todayAddress];
+                }
+
+                setSlots(todaysSlots);
             }
-
-            setSlots(todaysSlots);
         },
         [TABLE_SIZE]
     );
@@ -50,27 +53,91 @@ export default function Current({ TABLE_SIZE, times }) {
 
     return (
         <main className={styles.currentMain}>
-            {slots[currentLectureNumber] ? (
+            <div className={styles.dataWrapper}>
+                <h1 className={styles.tableTitle}>Timetable</h1>
                 <>
-                    <h1>
-                        Currently
-                        <span className={styles.currentLecture}>
-                            &lsquo;{slots[currentLectureNumber]?.subject}&rsquo;
-                        </span>
-                    </h1>
+                    <header className={styles.kheader}>
+                        <h1 className={styles.currentHeadingSubject}>
+                            {/* Data Structures & Algorithms */}
+                            {slots[currentLectureNumber]?.subject ?? "FREE!"}
+                        </h1>
+                        <h2 className={styles.currentHeadingRoom}>
+                            {/* B-101 */}
+                            {slots[currentLectureNumber]?.room ??
+                                "GO HOME OR SOME SHIT"}
+                        </h2>
+                    </header>
+                    <hr />
 
-                    <h2>
-                        In room
-                        <span className={styles.currentLecture}>
-                            &lsquo;{slots[currentLectureNumber]?.room}&rsquo;
-                        </span>
-                    </h2>
+                    <div className={styles.futureLectures}>
+                        <h2 className={styles.futureHeading}>
+                            Today&apos;s Lectures
+                        </h2>
+                        <ul>
+                            {futureLectures.map((_, i) => (
+                                <li key={i}>
+                                    {slots[i] ? (
+                                        <div
+                                            className={`${styles.futureLectureItem} ${
+                                                currentLectureNumber === i
+                                                    ? styles.currentSlot
+                                                    : i < currentLectureNumber
+                                                      ? styles.doneLecture
+                                                      : ""
+                                            }`}
+                                        >
+                                            <h3
+                                                className={
+                                                    styles.futureLectureSubject
+                                                }
+                                            >
+                                                {slots[i]?.subject ?? "FREE"}
+                                            </h3>
+                                            <h4
+                                                className={
+                                                    styles.futureLectureRoom
+                                                }
+                                            >
+                                                {slots[i]?.room ?? "FREE"}
+                                            </h4>
+                                        </div>
+                                    ) : (
+                                        <div
+                                            className={`${styles.futureLectureItem} ${styles.freeLecture} ${
+                                                currentLectureNumber === i
+                                                    ? styles.currentSlot
+                                                    : ""
+                                            }`}
+                                        >
+                                            FREE
+                                        </div>
+                                    )}
+                                </li>
+                            ))}
+                            {/* <li>
+                                <div className={styles.futureLectureItem}>
+                                    <h3 className={styles.futureLectureSubject}>
+                                        Object Oriented Language
+                                    </h3>
+                                    <h4 className={styles.futureLectureRoom}>
+                                        NB-201
+                                    </h4>
+                                </div>
+                            </li>
+                            <li>
+                                <div className={styles.futureLectureItem}>
+                                    <h3 className={styles.futureLectureSubject}>
+                                        Digital Logic & Design
+                                    </h3>
+                                    <h4 className={styles.futureLectureRoom}>
+                                        B-207 LAB
+                                    </h4>
+                                </div>
+                            </li> */}
+                        </ul>
+                    </div>
                 </>
-            ) : (
-                <h1 className="noLecture">
-                    There&apos;s no lecture for now 🥳
-                </h1>
-            )}
+            </div>
         </main>
     );
 }
