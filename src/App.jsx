@@ -34,10 +34,8 @@ export default function App() {
     const [currentActive, setCurrentActive] = useState(Boolean(timeParam));
 
     useEffect(function () {
-        console.log("use app");
-
         if (timeParam) {
-            // localStorage.setItem("timid", timeParam);
+            localStorage.setItem("timid", timeParam);
         }
     }, []);
 
@@ -47,7 +45,6 @@ export default function App() {
                 <Current
                     TABLE_SIZE={TABLE_SIZE}
                     times={times}
-                    getInitialSlots={getInitialSlots}
                     slots={slots}
                     searchParams={searchParams}
                 />

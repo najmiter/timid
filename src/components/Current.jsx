@@ -1,29 +1,26 @@
 import styles from "./Current.module.css";
 
 /* eslint-disable react/prop-types */
-export default function Current({ times, getInitialSlots, searchParams }) {
-    const slots = getTodaysSlots();
+export default function Current({ times, slots, searchParams }) {
+    const slots_ = getTodaysSlots();
 
     const { slotTime, startTime } = times;
     const currentLectureNumber = getCurrentLecture();
-    const futureLectures = Array(Object.keys(slots).length).fill(0);
+    const futureLectures = Array(Object.keys(slots_).length).fill(0);
 
     function getTodaysSlots() {
-        console.log("use current");
-
         try {
             const timid =
                 JSON.parse(
                     searchParams.get("time") ??
                         localStorage.getItem("timid") ??
                         null
-                ) ?? getInitialSlots();
+                ) ?? slots;
 
             const today = new Date().getDay();
             if (today !== 6 && today !== 0) {
                 const todaysSlots = {};
                 const cols = 6;
-                console.log(timid);
 
                 for (let i = 0; i < cols; i += 1) {
                     const todayAddress = i * cols + today;
@@ -34,7 +31,7 @@ export default function Current({ times, getInitialSlots, searchParams }) {
             }
         } catch (e) {
             console.error(e?.message);
-            return getInitialSlots();
+            return slots;
         }
     }
 
@@ -67,13 +64,13 @@ export default function Current({ times, getInitialSlots, searchParams }) {
                 <>
                     <header className={styles.kheader}>
                         <h1 className={styles.currentHeadingSubject}>
-                            {slots[currentLectureNumber]?.subject.length
-                                ? slots[currentLectureNumber]?.subject
+                            {slots_[currentLectureNumber]?.subject.length
+                                ? slots_[currentLectureNumber]?.subject
                                 : "FREE!"}
                         </h1>
                         <h2 className={styles.currentHeadingRoom}>
-                            {slots[currentLectureNumber]?.room.length
-                                ? slots[currentLectureNumber]?.room
+                            {slots_[currentLectureNumber]?.room.length
+                                ? slots_[currentLectureNumber]?.room
                                 : "GO HOME OR SOME SHIT"}
                         </h2>
                     </header>
@@ -93,23 +90,24 @@ export default function Current({ times, getInitialSlots, searchParams }) {
                                                 : i < currentLectureNumber
                                                   ? styles.doneLecture
                                                   : ""
-                                        } ${slots[i]?.subject && slots[i]?.room ? "" : styles.freeLecture}`}
+                                        } ${slots_[i]?.subject && slots_[i]?.room ? "" : styles.freeLecture}`}
                                     >
-                                        {slots[i]?.subject && slots[i]?.room ? (
+                                        {slots_[i]?.subject &&
+                                        slots_[i]?.room ? (
                                             <>
                                                 <h3
                                                     className={
                                                         styles.futureLectureSubject
                                                     }
                                                 >
-                                                    {slots[i]?.subject}
+                                                    {slots_[i]?.subject}
                                                 </h3>
                                                 <h4
                                                     className={
                                                         styles.futureLectureRoom
                                                     }
                                                 >
-                                                    {slots[i]?.room}
+                                                    {slots_[i]?.room}
                                                 </h4>
                                             </>
                                         ) : (
