@@ -28,11 +28,17 @@ export default function Homepage({
 
     useEffect(
         function () {
-            const timid = JSON.parse(localStorage.getItem("timid") ?? "{}");
+            let timid;
 
-            setSlots(() =>
-                Object.keys(timid).length ? timid : getInitialSlots()
-            );
+            try {
+                timid = JSON.parse(localStorage.getItem("timid"));
+            } catch (_) {
+                localStorage.removeItem("timid");
+            } finally {
+                setSlots(() =>
+                    Object.keys(timid).length ? timid : getInitialSlots()
+                );
+            }
         },
         [setSlots, getInitialSlots]
     );

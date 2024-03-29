@@ -51,7 +51,6 @@ export default function Current({ TABLE_SIZE, times }) {
         return slotNumber ? slotNumber - 1 : slotNumber;
     }
 
-    console.log(slots);
     return (
         <main className={styles.currentMain}>
             <div className={styles.dataWrapper}>
