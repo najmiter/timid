@@ -31,13 +31,15 @@ export default function Homepage({
             let timid;
 
             try {
-                timid = JSON.parse(localStorage.getItem("timid"));
+                if (localStorage.getItem("timid")) {
+                    timid = JSON.parse(localStorage.getItem("timid"));
+                } else {
+                    timid = getInitialSlots();
+                }
             } catch (_) {
                 localStorage.removeItem("timid");
             } finally {
-                setSlots(() =>
-                    Object.keys(timid).length ? timid : getInitialSlots()
-                );
+                setSlots(() => timid);
             }
         },
         [setSlots, getInitialSlots]
