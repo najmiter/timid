@@ -26,8 +26,6 @@ export default function Homepage({
     useEffect(
         function () {
             let timid = getInitialSlots();
-            console.log("use homepage");
-
             try {
                 if (localStorage.getItem("timid")) {
                     timid = JSON.parse(localStorage.getItem("timid"));
@@ -73,7 +71,8 @@ export default function Homepage({
     function handleShare(e) {
         e.preventDefault();
         const url = new URLSearchParams(window.location.search);
-        url.set("time", JSON.stringify(slots));
+        url.set("slots", JSON.stringify(slots));
+        url.set("times", JSON.stringify(times));
 
         navigator.clipboard.writeText(`${window.location.href}?${url}`);
     }

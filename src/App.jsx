@@ -13,8 +13,15 @@ function getInitialSlots() {
     return initialSlots;
 }
 
+const initialTimes = {
+    slotTime: +(localStorage.getItem("timid_slotTime") ?? 90),
+    startTime: localStorage.getItem("timid_startTime") ?? "08:45",
+    break: true,
+};
+
 const searchParams = new URLSearchParams(window.location.search);
-const timeParam = searchParams.get("time");
+const timeParam = searchParams.get("slots");
+const timesParam = searchParams.get("times");
 
 export default function App() {
     const [slots, setSlots] = useState(
@@ -25,19 +32,20 @@ export default function App() {
                     null
             ) ?? getInitialSlots()
     );
-    const [times, setTimes] = useState({
-        slotTime: +(localStorage.getItem("timid_slotTime") ?? 90),
-        startTime: localStorage.getItem("timid_startTime") ?? "08:45",
-        break: true,
-    });
+    const [times, setTimes] = useState(JSON.parse(timesParam) ?? initialTimes);
 
     const [currentActive, setCurrentActive] = useState(Boolean(timeParam));
 
-    useEffect(function () {
-        if (timeParam) {
-            localStorage.setItem("timid", timeParam);
-        }
-    }, []);
+    useEffect(
+        function () {
+            if (timeParam) {
+                localStorage.setItem("timid", timeParam);
+                localStorage.setItem("timid_startTime", times.startTime);
+                localStorage.setItem("timid_slotTime", times.slotTime);
+            }
+        },
+        [times]
+    );
 
     return (
         <>

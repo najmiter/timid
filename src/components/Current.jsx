@@ -12,7 +12,7 @@ export default function Current({ times, slots, searchParams }) {
         try {
             const timid =
                 JSON.parse(
-                    searchParams.get("time") ??
+                    searchParams.get("slots") ??
                         localStorage.getItem("timid") ??
                         null
                 ) ?? slots;
@@ -20,10 +20,10 @@ export default function Current({ times, slots, searchParams }) {
             const today = new Date().getDay();
             if (today !== 6 && today !== 0) {
                 const todaysSlots = {};
-                const cols = 6;
+                const cols = 7;
 
                 for (let i = 0; i < cols; i += 1) {
-                    const todayAddress = i * cols + today;
+                    const todayAddress = i * (cols - 1) + today;
                     todaysSlots[i] = timid[todayAddress] ?? null;
                 }
 
