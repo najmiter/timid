@@ -26,8 +26,8 @@ export default function App() {
             ) ?? getInitialSlots()
     );
     const [times, setTimes] = useState({
-        slotTime: 90,
-        startTime: "08:45",
+        slotTime: +(localStorage.getItem("timid_slotTime") ?? 90),
+        startTime: localStorage.getItem("timid_startTime") ?? "08:45",
         break: true,
     });
 

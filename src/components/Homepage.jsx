@@ -45,12 +45,16 @@ export default function Homepage({
     );
 
     function handleSetTimes(e) {
+        const value = e.target.value;
+        localStorage.setItem("timid_startTime", value);
         setTimes((t) => {
             return { ...t, startTime: e.target.value };
         });
     }
 
     function handleSetSlotTime(e) {
+        const value = e.target.value;
+        localStorage.setItem("timid_slotTime", value);
         setTimes((t) => {
             return {
                 ...t,
