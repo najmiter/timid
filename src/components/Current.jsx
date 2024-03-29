@@ -1,10 +1,8 @@
 import styles from "./Current.module.css";
 
-import { useSearchParams } from "react-router-dom";
-
 /* eslint-disable react/prop-types */
 export default function Current({ times, getInitialSlots }) {
-    const [searchParams] = useSearchParams();
+    const searchParams = new URLSearchParams(window.location.search);
     const slots = getTodaysSlots();
 
     const { slotTime, startTime } = times;

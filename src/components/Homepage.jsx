@@ -7,10 +7,11 @@ import Table from "./Table";
 import Input from "./Input";
 import DaysRow from "./DaysRow";
 import Slot from "./Slot";
-import Current from "../pages/Current";
+import Current from "./Current";
 
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { Button } from "bootstrap";
 
 export default function Homepage({
     slots,
@@ -18,9 +19,8 @@ export default function Homepage({
     getInitialSlots,
     times,
     setTimes,
+    setCurrentActive,
 }) {
-    const [searchParams, setSearchParams] = useSearchParams();
-
     const [title, setTitle] = useState("");
 
     const { slotTime, startTime } = times;
@@ -41,11 +41,10 @@ export default function Homepage({
                     JSON.stringify(getInitialSlots())
                 );
             } finally {
-                if (!searchParams.has("time"))
-                    setSlots(() => timid ?? getInitialSlots());
+                setSlots(() => timid ?? getInitialSlots());
             }
         },
-        [setSlots, getInitialSlots, searchParams]
+        [setSlots, getInitialSlots]
     );
 
     function handleSetTimes(e) {
@@ -84,18 +83,6 @@ export default function Homepage({
         setSlots(getInitialSlots());
     }
 
-    const timeParam = searchParams.get("time");
-    if (timeParam) {
-        localStorage.setItem("timid", timeParam);
-        return (
-            <Current
-                TABLE_SIZE={7 * 6}
-                times={times}
-                getInitialSlots={getInitialSlots}
-            />
-        );
-    }
-
     return (
         <main className={styles.main}>
             <ToolsPanel>
@@ -127,12 +114,15 @@ export default function Homepage({
                     <button className="secondaryBtn" onClick={clearSlots}>
                         Clear
                     </button>
-                    <Link className="primaryBtn" to="/current">
+                    <button
+                        className="primaryBtn"
+                        onClick={() => setCurrentActive(true)}
+                    >
                         Current
-                    </Link>
-                    <Link onClick={handleShare} className="primaryBtn" to="/">
+                    </button>
+                    <button onClick={handleShare} className="primaryBtn">
                         Share
-                    </Link>
+                    </button>
                 </div>
             </ToolsPanel>
             <Editor>
