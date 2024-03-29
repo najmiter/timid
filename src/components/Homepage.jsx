@@ -73,6 +73,7 @@ export default function Homepage({
         const url = new URLSearchParams(window.location.search);
         url.set("slots", JSON.stringify(slots));
         url.set("times", JSON.stringify(times));
+        url.set("title", title);
 
         navigator.clipboard.writeText(`${window.location.href}?${url}`);
     }

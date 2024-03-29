@@ -20,21 +20,19 @@ const initialTimes = {
 };
 
 const searchParams = new URLSearchParams(window.location.search);
-const timeParam = searchParams.get("slots");
+const slotsParam = searchParams.get("slots");
 const timesParam = searchParams.get("times");
+const titleParam = searchParams.get("title");
 
 export default function App() {
     const [title, setTitle] = useState(
-        localStorage.getItem("timid_title") ?? "Timetable"
+        titleParam ?? localStorage.getItem("timid_title") ?? "Timetable"
     );
 
     const [slots, setSlots] = useState(
         () =>
-            JSON.parse(
-                searchParams.get("time") ??
-                    localStorage.getItem("timid") ??
-                    null
-            ) ?? getInitialSlots()
+            JSON.parse(slotsParam ?? localStorage.getItem("timid") ?? null) ??
+            getInitialSlots()
     );
     const [times, setTimes] = useState(JSON.parse(timesParam) ?? initialTimes);
 
@@ -52,8 +50,8 @@ export default function App() {
 
     useEffect(
         function () {
-            if (timeParam) {
-                localStorage.setItem("timid", timeParam);
+            if (slotsParam) {
+                localStorage.setItem("timid", slotsParam);
                 localStorage.setItem("timid_startTime", times.startTime);
                 localStorage.setItem("timid_slotTime", times.slotTime);
             }
