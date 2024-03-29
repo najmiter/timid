@@ -11,7 +11,7 @@ export default function Current({ TABLE_SIZE, times, getInitialSlots }) {
 
     useEffect(
         function () {
-            let timid = getInitialSlots();
+            let timid;
 
             try {
                 timid = JSON.parse(localStorage.getItem("timid"));
@@ -32,7 +32,7 @@ export default function Current({ TABLE_SIZE, times, getInitialSlots }) {
                 setSlots(todaysSlots);
             }
         },
-        [TABLE_SIZE]
+        [TABLE_SIZE, getInitialSlots]
     );
 
     function getCurrentLecture() {

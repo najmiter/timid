@@ -35,7 +35,10 @@ export default function Homepage({
                     timid = JSON.parse(localStorage.getItem("timid"));
                 }
             } catch (_) {
-                localStorage.removeItem("timid");
+                localStorage.setItem(
+                    "timid",
+                    JSON.stringify(getInitialSlots())
+                );
             } finally {
                 setSlots(() => timid);
             }
