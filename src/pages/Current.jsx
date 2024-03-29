@@ -11,7 +11,7 @@ export default function Current({ TABLE_SIZE, times, getInitialSlots }) {
 
     useEffect(
         function () {
-            let timid;
+            let timid = {};
 
             try {
                 timid = JSON.parse(localStorage.getItem("timid"));
@@ -26,7 +26,7 @@ export default function Current({ TABLE_SIZE, times, getInitialSlots }) {
 
                 for (let i = 0; i < cols; i += 1) {
                     const todayAddress = i * cols + today;
-                    todaysSlots[i] = timid[todayAddress];
+                    todaysSlots[i] = timid[todayAddress] ?? null;
                 }
 
                 setSlots(todaysSlots);
