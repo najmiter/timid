@@ -14,12 +14,18 @@ export default function Current({ TABLE_SIZE, times, getInitialSlots }) {
 
     useEffect(
         function () {
-            let timid = getInitialSlots();
+            let timid = {};
 
             try {
-                timid = JSON.parse(searchParams.get("time"));
+                timid =
+                    JSON.parse(
+                        searchParams.get("time") ??
+                            localStorage.getItem("timid") ??
+                            null
+                    ) ?? getInitialSlots();
             } catch (e) {
                 console.error(e?.message);
+                timid = getInitialSlots();
             }
 
             const today = new Date().getDay();
@@ -29,13 +35,14 @@ export default function Current({ TABLE_SIZE, times, getInitialSlots }) {
 
                 for (let i = 0; i < cols; i += 1) {
                     const todayAddress = i * cols + today;
+                    console.log(timid);
                     todaysSlots[i] = timid[todayAddress] ?? null;
                 }
 
                 setSlots(todaysSlots);
             }
         },
-        [TABLE_SIZE, getInitialSlots]
+        [TABLE_SIZE, getInitialSlots, searchParams]
     );
 
     function getCurrentLecture() {
