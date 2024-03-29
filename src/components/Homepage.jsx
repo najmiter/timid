@@ -28,13 +28,11 @@ export default function Homepage({
 
     useEffect(
         function () {
-            let timid;
+            let timid = getInitialSlots();
 
             try {
                 if (localStorage.getItem("timid")) {
                     timid = JSON.parse(localStorage.getItem("timid"));
-                } else {
-                    timid = getInitialSlots();
                 }
             } catch (_) {
                 localStorage.removeItem("timid");
