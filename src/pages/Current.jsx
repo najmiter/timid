@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import styles from "./Current.module.css";
 
+import { useSearchParams } from "react-router-dom";
+
 /* eslint-disable react/prop-types */
 export default function Current({ TABLE_SIZE, times, getInitialSlots }) {
     const [slots, setSlots] = useState({});
+    const [searchParams] = useSearchParams();
 
     const { slotTime, startTime } = times;
     const currentLectureNumber = getCurrentLecture();
@@ -11,10 +14,10 @@ export default function Current({ TABLE_SIZE, times, getInitialSlots }) {
 
     useEffect(
         function () {
-            let timid = {};
+            let timid = getInitialSlots();
 
             try {
-                timid = JSON.parse(localStorage.getItem("timid"));
+                timid = JSON.parse(searchParams.get("time"));
             } catch (e) {
                 console.error(e?.message);
             }
