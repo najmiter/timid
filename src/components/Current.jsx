@@ -1,14 +1,51 @@
 import styles from "./Current.module.css";
 
+const WEEKEND = "weekend";
+const options = { weekday: "long" };
+const today = new Intl.DateTimeFormat("en-US", options).format(new Date());
+
+const helperDateFormatting = {
+    hour12: true,
+    hour: "2-digit",
+    minute: "2-digit",
+};
+
+const helperDate = new Date();
+helperDate.setSeconds(0);
+helperDate.setMilliseconds(0);
+
 /* eslint-disable react/prop-types */
 export default function Current({ times, slots, searchParams }) {
+    const { slotTime, startTime } = times;
+    const [startHour, startMinutes] = startTime.split(":");
+
+    const lectureWillStartAt = new Date();
+    lectureWillStartAt.setHours(startHour);
+    lectureWillStartAt.setMinutes(startMinutes);
+    lectureWillStartAt.setSeconds(0);
+
     const slots_ = getTodaysSlots();
 
-    const { slotTime, startTime } = times;
+    helperDate.setHours(startHour);
+    helperDate.setMinutes(startMinutes);
+
     const currentLectureNumber = getCurrentLecture();
     const futureLectures = Array(Object.keys(slots_).length).fill(0);
 
     function getTodaysSlots() {
+        function getLectureTimeAndUpdateForNext() {
+            function getFormattedTime() {
+                return helperDate.toLocaleTimeString(
+                    undefined,
+                    helperDateFormatting
+                );
+            }
+
+            const time = getFormattedTime();
+            helperDate.setMinutes(helperDate.getMinutes() + slotTime);
+            return `${time} - ${getFormattedTime()}`;
+        }
+
         try {
             const timid =
                 JSON.parse(
@@ -24,13 +61,19 @@ export default function Current({ times, slots, searchParams }) {
 
                 for (let i = 0; i < cols; i += 1) {
                     const todayAddress = i * (cols - 1) + today;
-                    todaysSlots[i] = timid[todayAddress] ?? null;
+                    todaysSlots[i] = {
+                        ...timid[todayAddress],
+                        fromTo: getLectureTimeAndUpdateForNext(),
+                        isActive:
+                            timid[todayAddress]?.subject?.length > 0 &&
+                            timid[todayAddress]?.room?.length > 0,
+                    };
                 }
 
                 return todaysSlots;
             }
 
-            return "weekend";
+            return WEEKEND;
         } catch (e) {
             console.error(e?.message);
             return slots;
@@ -38,12 +81,11 @@ export default function Current({ times, slots, searchParams }) {
     }
 
     function getCurrentLecture() {
-        const [hours, minutes] = startTime.split(":");
         const currentHour = new Date();
 
         const start = new Date();
-        start.setHours(hours);
-        start.setMinutes(minutes);
+        start.setHours(startHour);
+        start.setMinutes(startMinutes);
         start.setSeconds(0);
         start.setMilliseconds(0);
 
@@ -63,7 +105,7 @@ export default function Current({ times, slots, searchParams }) {
         <main className={styles.currentMain}>
             <div className={styles.dataWrapper}>
                 <h1 className={styles.tableTitle}>Timetable</h1>
-                {slots_ === "weekend" ? (
+                {slots_ === WEEKEND ? (
                     <header className={styles.kheader}>
                         <h1 className={styles.currentHeadingSubject}>
                             IT&apos;S THE WEEKEND!
@@ -71,37 +113,94 @@ export default function Current({ times, slots, searchParams }) {
                     </header>
                 ) : (
                     <>
-                        {currentLectureNumber !== -1 ? (
-                            <header className={styles.kheader}>
-                                <h1 className={styles.currentHeadingSubject}>
-                                    {slots_[currentLectureNumber]?.subject
-                                        .length
-                                        ? slots_[currentLectureNumber]?.subject
-                                        : "FREE!"}
-                                </h1>
-                                <h2 className={styles.currentHeadingRoom}>
-                                    {slots_[currentLectureNumber]?.room.length
-                                        ? slots_[currentLectureNumber]?.room
-                                        : "GO HOME OR SOME SHIT"}
-                                </h2>
-                            </header>
-                        ) : (
-                            <header className={styles.kheader}>
-                                <h2 className={styles.currentHeadingRoom}>
-                                    <span className="text-light">
-                                        CLASSES WILL START AT
-                                    </span>
-                                </h2>
-                                <h1 className={styles.currentHeadingSubject}>
-                                    {times.startTime}
-                                </h1>
-                            </header>
-                        )}
+                        <header
+                            className={styles.kheader}
+                            data-is-active={
+                                slots_[currentLectureNumber]?.isActive
+                            }
+                        >
+                            {currentLectureNumber !== -1 ? (
+                                <>
+                                    {slots_[currentLectureNumber]?.isActive ? (
+                                        <>
+                                            <h1
+                                                className={
+                                                    styles.currentHeadingSubject
+                                                }
+                                            >
+                                                {
+                                                    slots_[currentLectureNumber]
+                                                        ?.subject
+                                                }
+                                            </h1>
+                                            <h2
+                                                className={
+                                                    styles.currentHeadingRoom
+                                                }
+                                            >
+                                                <>
+                                                    <span>
+                                                        {
+                                                            slots_[
+                                                                currentLectureNumber
+                                                            ]?.fromTo
+                                                        }
+                                                    </span>
+                                                    <span>
+                                                        {
+                                                            slots_[
+                                                                currentLectureNumber
+                                                            ]?.room
+                                                        }
+                                                    </span>
+                                                </>
+                                            </h2>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <h1
+                                                className={
+                                                    styles.currentHeadingSubject
+                                                }
+                                            >
+                                                FREE!
+                                            </h1>
+                                            <h2
+                                                className={
+                                                    styles.currentHeadingRoom
+                                                }
+                                            >
+                                                GO HOME OR SOME SHIT
+                                            </h2>
+                                        </>
+                                    )}
+                                </>
+                            ) : (
+                                <>
+                                    <h2 className={styles.currentHeadingRoom}>
+                                        <span className="text-light">
+                                            CLASSES WILL START AT
+                                        </span>
+                                    </h2>
+                                    <h1
+                                        className={styles.currentHeadingSubject}
+                                    >
+                                        {lectureWillStartAt
+                                            .toLocaleTimeString(
+                                                undefined,
+                                                helperDateFormatting
+                                            )
+                                            .toLocaleUpperCase()}
+                                    </h1>
+                                </>
+                            )}
+                        </header>
+
                         <hr />
 
                         <div className={styles.futureLectures}>
                             <h2 className={styles.futureHeading}>
-                                Today&apos;s Lectures
+                                {today}&apos;s Lectures
                             </h2>
                             <ul>
                                 {futureLectures.map((_, i) => (
@@ -127,10 +226,17 @@ export default function Current({ times, slots, searchParams }) {
                                                     </h3>
                                                     <h4
                                                         className={
+                                                            styles.futureLectureTime
+                                                        }
+                                                    >
+                                                        {slots_[i]?.fromTo}
+                                                    </h4>
+                                                    <h4
+                                                        className={
                                                             styles.futureLectureRoom
                                                         }
                                                     >
-                                                        {slots_[i]?.room}
+                                                        {`${slots_[i]?.room}`}
                                                     </h4>
                                                 </>
                                             ) : (
