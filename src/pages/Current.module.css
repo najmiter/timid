@@ -1,6 +1,6 @@
 .currentMain {
-    height: 100vh;
-    height: 100svh;
+    min-height: 100vh;
+    min-height: 100svh;
     width: 100vw;
     position: relative;
     background: rgba(24, 24, 24, 0.717);
@@ -12,6 +12,7 @@
 .dataWrapper {
     display: flex;
     flex-direction: column;
+    height: 100%;
     gap: 2rem;
     border-radius: 1rem;
     width: 50rem;
