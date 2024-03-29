@@ -37,7 +37,7 @@ export default function App() {
         console.log("use app");
 
         if (timeParam) {
-            localStorage.setItem("timid", timeParam);
+            // localStorage.setItem("timid", timeParam);
         }
     }, []);
 

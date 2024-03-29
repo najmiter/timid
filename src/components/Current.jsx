@@ -10,10 +10,9 @@ export default function Current({ times, getInitialSlots, searchParams }) {
 
     function getTodaysSlots() {
         console.log("use current");
-        let timid = {};
 
         try {
-            timid =
+            const timid =
                 JSON.parse(
                     searchParams.get("time") ??
                         localStorage.getItem("timid") ??

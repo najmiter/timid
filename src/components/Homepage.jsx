@@ -18,7 +18,7 @@ export default function Homepage({
     setTimes,
     setCurrentActive,
 }) {
-    const [title, setTitle] = useState("");
+    const [title, setTitle] = useState("Timetable");
 
     const { slotTime, startTime } = times;
     const slotsKeys = Object.keys(slots);
