@@ -29,6 +29,7 @@ export default function Homepage({
     useEffect(
         function () {
             let timid = getInitialSlots();
+            console.log("use homepage");
 
             try {
                 if (localStorage.getItem("timid")) {
@@ -40,10 +41,11 @@ export default function Homepage({
                     JSON.stringify(getInitialSlots())
                 );
             } finally {
-                setSlots(() => timid ?? getInitialSlots());
+                if (!searchParams.has("time"))
+                    setSlots(() => timid ?? getInitialSlots());
             }
         },
-        [setSlots, getInitialSlots]
+        [setSlots, getInitialSlots, searchParams]
     );
 
     function handleSetTimes(e) {

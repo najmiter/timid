@@ -1,49 +1,46 @@
-import { useEffect, useState } from "react";
 import styles from "./Current.module.css";
 
 import { useSearchParams } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
-export default function Current({ TABLE_SIZE, times, getInitialSlots }) {
-    const [slots, setSlots] = useState({});
+export default function Current({ times, getInitialSlots }) {
     const [searchParams] = useSearchParams();
+    const slots = getTodaysSlots();
 
     const { slotTime, startTime } = times;
     const currentLectureNumber = getCurrentLecture();
     const futureLectures = Array(Object.keys(slots).length).fill(0);
 
-    useEffect(
-        function () {
-            let timid = {};
+    function getTodaysSlots() {
+        console.log("use current");
+        let timid = {};
 
-            try {
-                timid =
-                    JSON.parse(
-                        searchParams.get("time") ??
-                            localStorage.getItem("timid") ??
-                            null
-                    ) ?? getInitialSlots();
-            } catch (e) {
-                console.error(e?.message);
-                timid = getInitialSlots();
-            }
+        try {
+            timid =
+                JSON.parse(
+                    searchParams.get("time") ??
+                        localStorage.getItem("timid") ??
+                        null
+                ) ?? getInitialSlots();
 
             const today = new Date().getDay();
             if (today !== 6 && today !== 0) {
                 const todaysSlots = {};
                 const cols = 6;
+                console.log(timid);
 
                 for (let i = 0; i < cols; i += 1) {
                     const todayAddress = i * cols + today;
-                    console.log(timid);
                     todaysSlots[i] = timid[todayAddress] ?? null;
                 }
 
-                setSlots(todaysSlots);
+                return todaysSlots;
             }
-        },
-        [TABLE_SIZE, getInitialSlots, searchParams]
-    );
+        } catch (e) {
+            console.error(e?.message);
+            return getInitialSlots();
+        }
+    }
 
     function getCurrentLecture() {
         const [hours, minutes] = startTime.split(":");

@@ -15,7 +15,7 @@ function getInitialSlots() {
 }
 
 export default function App() {
-    const [slots, setSlots] = useState(getInitialSlots());
+    const [slots, setSlots] = useState(() => getInitialSlots());
     const [times, setTimes] = useState({
         slotTime: 90,
         startTime: "08:45",
@@ -46,10 +46,6 @@ export default function App() {
                             getInitialSlots={getInitialSlots}
                         />
                     }
-                ></Route>
-                <Route
-                    path=":time"
-                    element={<Current TABLE_SIZE={TABLE_SIZE} times={times} />}
                 ></Route>
             </Routes>
         </BrowserRouter>
