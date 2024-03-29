@@ -24,6 +24,10 @@ const timeParam = searchParams.get("slots");
 const timesParam = searchParams.get("times");
 
 export default function App() {
+    const [title, setTitle] = useState(
+        localStorage.getItem("timid_title") ?? "Timetable"
+    );
+
     const [slots, setSlots] = useState(
         () =>
             JSON.parse(
@@ -36,6 +40,14 @@ export default function App() {
 
     const [currentActive, setCurrentActive] = useState(
         Boolean(searchParams.get("time") || localStorage.getItem("timid"))
+    );
+
+    useEffect(
+        function () {
+            document.title = `${title} - Made with timid`;
+            localStorage.setItem("timid_title", title);
+        },
+        [title]
     );
 
     useEffect(
@@ -67,6 +79,8 @@ export default function App() {
                     getInitialSlots={getInitialSlots}
                     times={times}
                     setTimes={setTimes}
+                    title={title}
+                    setTitle={setTitle}
                 />
             )}
         </>

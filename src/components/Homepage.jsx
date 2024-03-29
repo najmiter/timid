@@ -17,9 +17,9 @@ export default function Homepage({
     times,
     setTimes,
     setCurrentActive,
+    title,
+    setTitle,
 }) {
-    const [title, setTitle] = useState("Timetable");
-
     const { slotTime, startTime } = times;
     const slotsKeys = Object.keys(slots);
 
@@ -81,8 +81,10 @@ export default function Homepage({
         localStorage.removeItem("timid");
         localStorage.removeItem("timid_startTime");
         localStorage.removeItem("timid_slotTime");
+        localStorage.removeItem("timid_title");
 
-        setSlots({});
+        setSlots(getInitialSlots());
+        setTitle("Timetable");
     }
 
     return (
