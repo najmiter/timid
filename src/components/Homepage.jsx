@@ -82,7 +82,13 @@ export default function Homepage({
     const timeParam = searchParams.get("time");
     if (timeParam) {
         localStorage.setItem("timid", timeParam);
-        return <Current TABLE_SIZE={7 * 6} times={times} />;
+        return (
+            <Current
+                TABLE_SIZE={7 * 6}
+                times={times}
+                getInitialSlots={getInitialSlots}
+            />
+        );
     }
 
     return (

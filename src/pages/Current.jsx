@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./Current.module.css";
 
 /* eslint-disable react/prop-types */
-export default function Current({ TABLE_SIZE, times }) {
+export default function Current({ TABLE_SIZE, times, getInitialSlots }) {
     const [slots, setSlots] = useState({});
 
     const { slotTime, startTime } = times;
@@ -11,7 +11,13 @@ export default function Current({ TABLE_SIZE, times }) {
 
     useEffect(
         function () {
-            const timid = JSON.parse(localStorage.getItem("timid"));
+            let timid = getInitialSlots();
+
+            try {
+                timid = JSON.parse(localStorage.getItem("timid"));
+            } catch (e) {
+                console.error(e?.message);
+            }
 
             const today = new Date().getDay();
             if (today !== 6 && today !== 0) {

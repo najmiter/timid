@@ -39,7 +39,13 @@ export default function App() {
                 ></Route>
                 <Route
                     path="current"
-                    element={<Current TABLE_SIZE={TABLE_SIZE} times={times} />}
+                    element={
+                        <Current
+                            TABLE_SIZE={TABLE_SIZE}
+                            times={times}
+                            getInitialSlots={getInitialSlots}
+                        />
+                    }
                 ></Route>
                 <Route
                     path=":time"
