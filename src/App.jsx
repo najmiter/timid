@@ -68,6 +68,7 @@ export default function App() {
                     slots={slots}
                     searchParams={searchParams}
                     setCurrentActive={setCurrentActive}
+                    title={title}
                 />
             ) : (
                 <Homepage

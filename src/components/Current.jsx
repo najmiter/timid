@@ -20,6 +20,7 @@ export default function Current({
     slots,
     searchParams,
     setCurrentActive,
+    title,
 }) {
     const { slotTime, startTime } = times;
     const [startHour, startMinutes] = startTime.split(":");
@@ -115,7 +116,9 @@ export default function Current({
                 &times;
             </span>
             <div className={styles.dataWrapper}>
-                <h1 className={styles.tableTitle}>Timetable</h1>
+                <h1
+                    className={styles.tableTitle}
+                >{`${title.substring(0, 25)}${title.length >= 25 ? "..." : ""}`}</h1>
                 {slots_ === WEEKEND ? (
                     <header className={styles.kheader}>
                         <h1 className={styles.currentHeadingSubject}>
