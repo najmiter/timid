@@ -7,11 +7,8 @@ import Table from "./Table";
 import Input from "./Input";
 import DaysRow from "./DaysRow";
 import Slot from "./Slot";
-import Current from "./Current";
 
 import { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import { Button } from "bootstrap";
 
 export default function Homepage({
     slots,
