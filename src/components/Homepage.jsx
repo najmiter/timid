@@ -40,7 +40,7 @@ export default function Homepage({
                     JSON.stringify(getInitialSlots())
                 );
             } finally {
-                setSlots(() => timid);
+                setSlots(() => timid ?? getInitialSlots());
             }
         },
         [setSlots, getInitialSlots]
