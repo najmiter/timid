@@ -1,8 +1,7 @@
 import styles from "./Current.module.css";
 
 /* eslint-disable react/prop-types */
-export default function Current({ times, getInitialSlots }) {
-    const searchParams = new URLSearchParams(window.location.search);
+export default function Current({ times, getInitialSlots, searchParams }) {
     const slots = getTodaysSlots();
 
     const { slotTime, startTime } = times;

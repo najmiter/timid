@@ -49,6 +49,7 @@ export default function App() {
                     times={times}
                     getInitialSlots={getInitialSlots}
                     slots={slots}
+                    searchParams={searchParams}
                 />
             ) : (
                 <Homepage
