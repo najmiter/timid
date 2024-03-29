@@ -15,7 +15,12 @@ helperDate.setSeconds(0);
 helperDate.setMilliseconds(0);
 
 /* eslint-disable react/prop-types */
-export default function Current({ times, slots, searchParams }) {
+export default function Current({
+    times,
+    slots,
+    searchParams,
+    setCurrentActive,
+}) {
     const { slotTime, startTime } = times;
     const [startHour, startMinutes] = startTime.split(":");
 
@@ -103,6 +108,12 @@ export default function Current({ times, slots, searchParams }) {
 
     return (
         <main className={styles.currentMain}>
+            <span
+                className={styles.closeBtn}
+                onClick={() => setCurrentActive(false)}
+            >
+                &times;
+            </span>
             <div className={styles.dataWrapper}>
                 <h1 className={styles.tableTitle}>Timetable</h1>
                 {slots_ === WEEKEND ? (

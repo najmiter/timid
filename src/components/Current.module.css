@@ -10,6 +10,25 @@
     --color-good: 221, 100%, 72%;
 }
 
+.closeBtn {
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    cursor: pointer;
+    color: hsl(var(--color-gray), 80%);
+    font-size: 4em;
+}
+
+.closeBtn:hover {
+    color: hsl(var(--color-gray));
+}
+
+@media screen and (max-width: 870px) {
+    .closeBtn {
+        display: none;
+    }
+}
+
 .dataWrapper {
     display: flex;
     flex-direction: column;

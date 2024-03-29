@@ -34,7 +34,9 @@ export default function App() {
     );
     const [times, setTimes] = useState(JSON.parse(timesParam) ?? initialTimes);
 
-    const [currentActive, setCurrentActive] = useState(Boolean(timeParam));
+    const [currentActive, setCurrentActive] = useState(
+        Boolean(searchParams.get("time") || localStorage.getItem("timid"))
+    );
 
     useEffect(
         function () {
@@ -55,6 +57,7 @@ export default function App() {
                     times={times}
                     slots={slots}
                     searchParams={searchParams}
+                    setCurrentActive={setCurrentActive}
                 />
             ) : (
                 <Homepage

@@ -78,9 +78,11 @@ export default function Homepage({
     }
 
     function clearSlots() {
-        localStorage.setItem("timid", JSON.stringify(getInitialSlots()));
+        localStorage.removeItem("timid");
+        localStorage.removeItem("timid_startTime");
+        localStorage.removeItem("timid_slotTime");
 
-        setSlots(getInitialSlots());
+        setSlots({});
     }
 
     return (
