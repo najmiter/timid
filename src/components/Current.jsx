@@ -17,7 +17,7 @@ export default function Current({ times, slots, searchParams }) {
                         null
                 ) ?? slots;
 
-            const today = 1;
+            const today = new Date().getDay();
             if (today !== 6 && today !== 0) {
                 const todaysSlots = {};
                 const cols = 7;
