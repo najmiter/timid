@@ -54,7 +54,7 @@ export default function App() {
         }
 
         if (timesParam) {
-            const { startTime, slotTime } = timesParam;
+            const { startTime, slotTime } = JSON.parse(timesParam);
             localStorage.setItem("timid_startTime", startTime);
             localStorage.setItem("timid_slotTime", slotTime);
         }
