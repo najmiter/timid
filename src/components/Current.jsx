@@ -32,10 +32,10 @@ export default function Current({
     lectureWillStartAt.setMinutes(startMinutes);
     lectureWillStartAt.setSeconds(0);
 
-    const slots_ = getTodaysSlots();
-
     helperDate.setHours(startHour);
     helperDate.setMinutes(startMinutes);
+
+    const slots_ = getTodaysSlots();
 
     const currentLectureNumber = getCurrentLecture();
     const futureLectures = Array(Object.keys(slots_).length).fill(0);
