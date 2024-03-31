@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styles from "./Current.module.css";
 
 const WEEKEND = "weekend";
@@ -17,6 +18,7 @@ helperDate.setMilliseconds(0);
 /* eslint-disable react/prop-types */
 export default function Current({
     times,
+    setTimes,
     slots,
     searchParams,
     setCurrentActive,
@@ -37,6 +39,13 @@ export default function Current({
 
     const currentLectureNumber = getCurrentLecture();
     const futureLectures = Array(Object.keys(slots_).length).fill(0);
+
+    useEffect(
+        function () {
+            setTimes(JSON.parse(searchParams.get("times")) ?? times);
+        },
+        [searchParams, setTimes, times]
+    );
 
     function getTodaysSlots() {
         function getLectureTimeAndUpdateForNext() {

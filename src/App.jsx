@@ -63,6 +63,7 @@ export default function App() {
         <>
             {currentActive ? (
                 <Current
+                    setTimes={setTimes}
                     TABLE_SIZE={TABLE_SIZE}
                     times={times}
                     slots={slots}
