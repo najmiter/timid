@@ -48,17 +48,17 @@ export default function App() {
         [title]
     );
 
-    useEffect(
-        function () {
-            if (slotsParam) {
-                localStorage.setItem("timid", slotsParam);
-            }
+    useEffect(function () {
+        if (slotsParam) {
+            localStorage.setItem("timid", slotsParam);
+        }
 
-            localStorage.setItem("timid_startTime", times.startTime);
-            localStorage.setItem("timid_slotTime", times.slotTime);
-        },
-        [times]
-    );
+        if (timesParam) {
+            const { startTime, slotTime } = timesParam;
+            localStorage.setItem("timid_startTime", startTime);
+            localStorage.setItem("timid_slotTime", slotTime);
+        }
+    }, []);
 
     return (
         <>
