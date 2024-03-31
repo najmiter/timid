@@ -52,9 +52,10 @@ export default function App() {
         function () {
             if (slotsParam) {
                 localStorage.setItem("timid", slotsParam);
-                localStorage.setItem("timid_startTime", times.startTime);
-                localStorage.setItem("timid_slotTime", times.slotTime);
             }
+
+            localStorage.setItem("timid_startTime", times.startTime);
+            localStorage.setItem("timid_slotTime", times.slotTime);
         },
         [times]
     );

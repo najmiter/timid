@@ -41,7 +41,10 @@ export default function Current({
     const futureLectures = Array(Object.keys(slots_).length).fill(0);
 
     useEffect(function () {
-        setTimes(JSON.parse(searchParams.get("times")) ?? times);
+        const tees = JSON.parse(searchParams.get("times"));
+        if (tees) {
+            setTimes(tees);
+        }
     }, []);
 
     function getTodaysSlots() {
