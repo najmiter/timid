@@ -18,7 +18,6 @@ helperDate.setMilliseconds(0);
 /* eslint-disable react/prop-types */
 export default function Current({
     times,
-    setTimes,
     slots,
     searchParams,
     setCurrentActive,
