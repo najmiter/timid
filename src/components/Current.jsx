@@ -40,13 +40,6 @@ export default function Current({
     const currentLectureNumber = getCurrentLecture();
     const futureLectures = Array(Object.keys(slots_).length).fill(0);
 
-    useEffect(function () {
-        const tees = JSON.parse(searchParams.get("times"));
-        if (tees) {
-            setTimes(tees);
-        }
-    }, []);
-
     function getTodaysSlots() {
         function getLectureTimeAndUpdateForNext() {
             function getFormattedTime() {
